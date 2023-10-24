@@ -5,8 +5,8 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 # 下面这2行要用最终选定的数据库的导入方式替代，此处用SQLite的暂存
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+#from flask_sqlalchemy import SQLAlchemy
+#db = SQLAlchemy()
 
 
 def App_Creation():
@@ -15,7 +15,7 @@ def App_Creation():
     login_manger = LoginManager()
     login_manger.login_view = 'authorize'
     login_manger.init_app(app)
-    db.init_app(app)
+    #db.init_app(app)
 
     from .user_class import User
     @login_manger.user_loader
