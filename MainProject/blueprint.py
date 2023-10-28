@@ -27,7 +27,7 @@ def login_post():
 
 @BP.route('/signup')
 def signup():
-    return render_template('signin.html')
+    return render_template('signup.html')
 
 
 @BP.route('/signup', methods=['POST'])
@@ -55,8 +55,9 @@ def filling():
     return render_template('filling.html')
 
 
-@BP.route('/filling', methods=['PUT'])
-def filling_put():
+@BP.route('/filling', methods=['POST'])
+def filling_post():
+    # 这地方按说应该用PUT,但是HTML写的网页只支持POST和GET，要用PUT需要使用JavaScript,待探究
     USER_weight = request.form.get('user_weight')
     USER_height = request.form.get('user_height')
     USER_age = request.form.get('user_age')
@@ -72,33 +73,23 @@ def filling_put():
 def main():
     return render_template('main.html')
 
-
-@BP.route('/main', methods=['GET'])
-def main_buttons():
-    if 'view' in request.form:
-        return redirect(url_for('BP.view'))
-    elif 'calculate' in request.form:
-        return render_template('result.html')
-
-
+# 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据——————————————————————————
 @BP.route('/view')
-@login_required
+# @login_required
 def view():
+    return render_template('view.html')  # , name=current_user.user_name)
+
+
+@BP.route('/view', methods=['GET'])
+@login_required
+def view_get():
     return render_template('view.html', name=current_user.user_name)
-
-
-@BP.route('/view', methods=['POST'])
-def view_buttons():
-    if 'edit' in request.form:
-        return redirect(url_for('BP.filling'))
-    elif 'back' in request.form:
-        return redirect(url_for('BP.main'))
-
+# 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据————————————————————————
 
 @BP.route('/result')
+# 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据
 def result():
     return render_template('result.html')
-
 
 @BP.route('/logout')
 @login_required
