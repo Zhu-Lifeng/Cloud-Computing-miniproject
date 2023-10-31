@@ -76,9 +76,10 @@ def main():
 
 
 
-@BP.route('/view', methods=['GET'])
+@BP.route('/view/<username>', methods=['GET'])
 @login_required
-def view_get():
+def view_get(username):
+    #这里要从数据库里抓取用户个人信息，显示到HTML界面中
     return render_template('view.html', name=current_user.user_name)
 
 
