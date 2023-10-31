@@ -73,7 +73,7 @@ def filling_post(user_name):
 @BP.route('/main')
 def main():
     return render_template('main.html')
-
+#这里需要解决如何抓取当前用户名并传入HTML界面的问题
 
 
 @BP.route('/view/<username>', methods=['GET'])
