@@ -47,16 +47,17 @@ def signup_post():
 
     ##这里要把新用户数据传到数据库里
 
-    return redirect(url_for('BP.filling'))
+    return redirect(url_for('BP.filling/<USER_name>'))
 
 
-@BP.route('/filling')
-def filling():
+@BP.route('/filling/<user_name>', methods=['GET'])
+def filling(user_name):
+    #这里从数据库里抓取用户个人数据
     return render_template('filling.html')
 
 
-@BP.route('/filling', methods=['POST'])
-def filling_post():
+@BP.route('/filling', methods=['PUT'])
+def filling_post(user_name):
     # 这地方按说应该用PUT,但是HTML写的网页只支持POST和GET，要用PUT需要使用JavaScript,待探究
     USER_weight = request.form.get('user_weight')
     USER_height = request.form.get('user_height')
@@ -73,18 +74,13 @@ def filling_post():
 def main():
     return render_template('main.html')
 
-# 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据——————————————————————————
-@BP.route('/view')
-# @login_required
-def view():
-    return render_template('view.html')  # , name=current_user.user_name)
 
 
 @BP.route('/view', methods=['GET'])
 @login_required
 def view_get():
     return render_template('view.html', name=current_user.user_name)
-# 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据————————————————————————
+
 
 @BP.route('/result')
 # 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据
