@@ -5,12 +5,19 @@
     <title>This is login page</title>
 </head>
 <body>
-This is login page.
-
+This is login page.<br>
 <form action="/login" method="post">
+    user_email<input type="email" name="user_email"><br>
+    user_password<input type="password" name="user_password"><br>
     <button type="submit">Log in now!</button>
 </form>
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 <form action="/">
     <button type="submit">Back</button>
 </form>

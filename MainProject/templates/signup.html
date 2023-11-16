@@ -6,11 +6,20 @@
 </head>
 
 <body>
-This is Signup page.
+This is Signup page.<br>
 <form action="/signup" method="post">
+    user_name<input type="text" name="user_name"><br>
+    user_email<input type="email" name="user_email"><br>
+    user_password<input type="password" name="user_password"><br>
     <button type="submit">Sign up now!</button>
 </form>
-
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 <form action="/">
     <button type="submit">Back</button>
 </form>
