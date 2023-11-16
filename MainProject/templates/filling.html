@@ -8,6 +8,9 @@
 This filling page.
 
 <form action="/filling" method="post">
+    Your height is ?<input type="number" name="user_height" value="{{user_height}}"><br>
+    Your weight is ?<input type="number"  name="user_weight" value="{{user_weight}}"><br>
+    Your  age   is ?<input type="number" name="user_age" value="{{user_age}}"><br>
     <button type="submit">Submit!</button>
 </form>
 因为数据库链路待补全，这个按钮只用作测试连通性使用
