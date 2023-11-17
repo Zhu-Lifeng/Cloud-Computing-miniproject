@@ -11,6 +11,7 @@ This is login page.<br>
     user_password<input type="password" name="user_password"><br>
     <button type="submit">Log in now!</button>
 </form>
+
 {% with messages = get_flashed_messages() %}
   {% if messages %}
     {% for message in messages %}
@@ -18,13 +19,11 @@ This is login page.<br>
     {% endfor %}
   {% endif %}
 {% endwith %}
+
 <form action="/">
     <button type="submit">Back</button>
 </form>
 
-因为数据库链路待补全，这个按钮只用作测试连通性使用
-<form action="/main">
-    <button type="submit">跳到mian</button>
 
 </body>
 </html>

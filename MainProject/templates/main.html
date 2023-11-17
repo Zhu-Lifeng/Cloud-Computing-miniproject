@@ -12,14 +12,42 @@ User Email:{{user.user_email}}<br>
 <form action="/view">
     <button type="submit" >View</button>
 </form>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Water</th>
+        <th>Energy</th>
+        <th>Protein</th>
+        <th>Sugar</th>
+        <th>Caffeine</th>
+  </tr>
+     {% for drink in drinks %}
+  <tr>
+      <td>{{ drink.drink_name }}</td>
+      <td>{{ drink. drink_water}}</td>
+      <td>{{ drink. drink_energy}}</td>
+      <td>{{ drink. drink_protein}}</td>
+      <td>{{ drink. drink_sugar}}</td>
+      <td>{{ drink. drink_caffeine}}</td>
 
-<form action="/result", method="post">
+  </tr>
+  {% endfor %}
+</table>>
+
+<form action="/drink_add", method="POST">
+    Drink's name is ?<input type="text" name="drink_name" ><br>
+    This drink contains <input type="number" name="drink_water" >g of water<br>
+    This drink contains <input type="number" name="drink_energy" >kcal of energy<br>
+    This drink contains <input type="number" name="drink_protein" >g of protein<br>
+    This drink contains <input type="number" name="drink_sugar" >g of sugar<br>
+    This drink contains <input type="number" name="drink_caffeine" >mg of caffeine<br>
+    <button type="submit" >Submit a new drink!</button>
+</form>
+
+<form action="/result">
     <button type="submit" name="Cal" value="Cal">Cal</button>
 </form>
-因为数据库链路待补全，这个按钮只用作测试连通性使用
-<form action="/result">
-    <button type="submit">跳到result</button>
-</form>
+
 <form action="/logout">
     <button type="submit">Log out</button>
 </form>
