@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from .user_class import User
+from .drink_class import Drink
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
@@ -47,7 +48,7 @@ def signup_post():
                     user_password=generate_password_hash(USER_password, method='sha256'),
                     user_weight=80,user_height=180,user_age=25)
 
-    ##这里要把新用户数据传到数据库里
+    #这里把新用户数据传到数据库里
     db.session.add(NEW_USER)
     db.session.commit()
 
@@ -71,15 +72,15 @@ def filling_post():
 
     db.session.commit()
 
-    ##这里要把用户数据更新到数据库里
+    #这里要把用户数据更新到数据库里
+
     return redirect(url_for('my_blueprint.main'))
 
 
 @BP.route('/main')
 @login_required
 def main():
-
-    return render_template('main.html', user=current_user)
+    return render_template('main.html', user=current_user, drinks=Drink.query.all())
 
 
 @BP.route('/view')
@@ -87,17 +88,35 @@ def main():
 def view():
     return render_template('view.html',user=current_user)  # , name=current_user.user_name)
 
+@BP.route('/drink_add', methods=['POST'])
+@login_required
+def drink_add():
+    DRINK_name = request.form.get('drink_name')
+    DRINK_water = request.form.get('drink_water')
+    DRINK_energy = request.form.get('drink_energy')
+    DRINK_protein = request.form.get('drink_protein')
+    DRINK_sugar = request.form.get('drink_sugar')
+    DRINK_caffeine = request.form.get('drink_caffeine')
 
-#@BP.route('/view', methods=['GET'])
-#@login_required
-#def view_get():
-#    return render_template('view.html', name=current_user.user_name)
-# 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据————————————————————————
+    DRINK = Drink.query.filter_by(drink_name=DRINK_name ).first()
+
+    if DRINK:
+        flash('This drink already exists')
+        return redirect(url_for('my_blueprint.main'))
+
+    NEW_DRINK = Drink(drink_name=DRINK_name,drink_water=DRINK_water,drink_energy=DRINK_energy,
+                      drink_protein=DRINK_protein,drink_sugar=DRINK_sugar,drink_caffeine=DRINK_caffeine)
+    db.session.add(NEW_DRINK)
+    db.session.commit()
+
+    return redirect(url_for('my_blueprint.main'))
+
 
 @BP.route('/result')
 @login_required
 # 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据
 def result():
+
     return render_template('result.html')
 
 

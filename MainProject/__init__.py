@@ -27,6 +27,11 @@ def App_Creation():
     def load_user(user_id):
         return User.query.get(user_id)
 
+    from .drink_class import Drink
+
+    def drink(drink_id):
+        return Drink.query.get(drink_id)
+
     from .blueprint import BP
     app.register_blueprint(BP)
 
