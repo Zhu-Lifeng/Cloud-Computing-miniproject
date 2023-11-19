@@ -6,6 +6,28 @@
 </head>
 <body>
 This is result page.
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Water</th>
+        <th>Energy</th>
+        <th>Protein</th>
+        <th>Sugar</th>
+        <th>Caffeine</th>
+        <th>Quantity</th>
+  </tr>
+     {% for drink in drinks %}
+  <tr>
+      <td>{{ drink.name }}</td>
+      <td>{{ drink. water}}</td>
+      <td>{{ drink. energy}}</td>
+      <td>{{ drink. protein}}</td>
+      <td>{{ drink. sugar}}</td>
+      <td>{{ drink. caffeine}}</td>
+      <td>{{ drink. quantity}}</td>
+  </tr>
+  {% endfor %}
+</table>
 
 <form action="/main">
     <button type="submit">Back</button>

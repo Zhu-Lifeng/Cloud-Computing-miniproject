@@ -12,7 +12,20 @@ User Email:{{user.user_email}}<br>
 <form action="/view">
     <button type="submit" >View</button>
 </form>
-<table>
+
+
+<form action="/drink_add"  method="POST">
+    Drink's name is ?<input type="text" name="drink_name" ><br>
+    This drink contains <input type="number" name="drink_water" >g of water<br>
+    This drink contains <input type="number" name="drink_energy" >kcal of energy<br>
+    This drink contains <input type="number" name="drink_protein" >g of protein<br>
+    This drink contains <input type="number" name="drink_sugar" >g of sugar<br>
+    This drink contains <input type="number" name="drink_caffeine" >mg of caffeine<br>
+    <button type="submit" >Submit a new drink!</button>
+</form>
+
+<form action="/result" method="POST">
+    <table>
     <tr>
         <th>Name</th>
         <th>Water</th>
@@ -29,22 +42,10 @@ User Email:{{user.user_email}}<br>
       <td>{{ drink. drink_protein}}</td>
       <td>{{ drink. drink_sugar}}</td>
       <td>{{ drink. drink_caffeine}}</td>
-
+      <td><input type="number" name="drink_number_{{drink.drink_name}}" value="drink.drink_number"></td>
   </tr>
   {% endfor %}
 </table>>
-
-<form action="/drink_add", method="POST">
-    Drink's name is ?<input type="text" name="drink_name" ><br>
-    This drink contains <input type="number" name="drink_water" >g of water<br>
-    This drink contains <input type="number" name="drink_energy" >kcal of energy<br>
-    This drink contains <input type="number" name="drink_protein" >g of protein<br>
-    This drink contains <input type="number" name="drink_sugar" >g of sugar<br>
-    This drink contains <input type="number" name="drink_caffeine" >mg of caffeine<br>
-    <button type="submit" >Submit a new drink!</button>
-</form>
-
-<form action="/result">
     <button type="submit" name="Cal" value="Cal">Cal</button>
 </form>
 
