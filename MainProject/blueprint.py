@@ -4,6 +4,7 @@ from .drink_class import Drink
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
+
 BP = Blueprint('my_blueprint', __name__)
 
 
@@ -16,7 +17,7 @@ def login():
 def login_post():
     USER_email = request.form['user_email']
     USER_password = request.form['user_password']
-    #print(USER_email,USER_password)
+    # print(USER_email,USER_password)
     USER = User.query.filter_by(user_email=USER_email).first()  # 本处query需按最终使用db类型修正函数
 
     if not USER or not check_password_hash(USER.user_password, USER_password):
@@ -46,9 +47,9 @@ def signup_post():
 
     NEW_USER = User(user_email=USER_email, user_name=USER_name,
                     user_password=generate_password_hash(USER_password, method='sha256'),
-                    user_weight=80,user_height=180,user_age=25)
+                    user_weight=80, user_height=180, user_age=25)
 
-    #这里把新用户数据传到数据库里
+    # 这里把新用户数据传到数据库里
     db.session.add(NEW_USER)
     db.session.commit()
 
@@ -72,7 +73,7 @@ def filling_post():
 
     db.session.commit()
 
-    #这里要把用户数据更新到数据库里
+    # 这里要把用户数据更新到数据库里
 
     return redirect(url_for('my_blueprint.main'))
 
@@ -86,7 +87,8 @@ def main():
 @BP.route('/view')
 @login_required
 def view():
-    return render_template('view.html',user=current_user)  # , name=current_user.user_name)
+    return render_template('view.html', user=current_user)  # , name=current_user.user_name)
+
 
 @BP.route('/drink_add', methods=['POST'])
 @login_required
@@ -98,26 +100,36 @@ def drink_add():
     DRINK_sugar = request.form.get('drink_sugar')
     DRINK_caffeine = request.form.get('drink_caffeine')
 
-    DRINK = Drink.query.filter_by(drink_name=DRINK_name ).first()
+    DRINK = Drink.query.filter_by(drink_name=DRINK_name).first()
 
     if DRINK:
         flash('This drink already exists')
         return redirect(url_for('my_blueprint.main'))
 
-    NEW_DRINK = Drink(drink_name=DRINK_name,drink_water=DRINK_water,drink_energy=DRINK_energy,
-                      drink_protein=DRINK_protein,drink_sugar=DRINK_sugar,drink_caffeine=DRINK_caffeine)
+    NEW_DRINK = Drink(drink_name=DRINK_name, drink_water=DRINK_water, drink_energy=DRINK_energy,
+                      drink_protein=DRINK_protein, drink_sugar=DRINK_sugar, drink_caffeine=DRINK_caffeine)
     db.session.add(NEW_DRINK)
     db.session.commit()
 
     return redirect(url_for('my_blueprint.main'))
 
 
-@BP.route('/result')
+@BP.route('/result', methods=['POST'])
 @login_required
 # 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据
 def result():
+    drinks_selected = []
+    for drink in Drink.query.all():
+        drink_number_key = f'drink_number_{drink.drink_name}'
+        drink_number = request.form.get(drink_number_key)
+        print(drink_number_key, drink_number)
+        if drink_number and int(drink_number) > 0:
+            drink_info = {'id': drink.id, 'name': drink.drink_name, 'water': drink.drink_water,
+                          'energy': drink.drink_energy, 'protein': drink.drink_protein, 'sugar': drink.drink_sugar,
+                          'caffeine': drink.drink_caffeine, 'quantity': drink_number}
+            drinks_selected.append(drink_info)
 
-    return render_template('result.html')
+    return render_template('result.html', drinks=drinks_selected)
 
 
 @BP.route('/logout')

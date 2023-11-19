@@ -4,8 +4,8 @@ from . import db
 class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     drink_name = db.Column(db.String(120), unique=True, nullable=False)
-    drink_water = db.Column(db.Integer, unique=True, nullable=False)
-    drink_energy = db.Column(db.Integer, unique=True, nullable=False)
-    drink_protein = db.Column(db.Integer, unique=True, nullable=False)
-    drink_sugar = db.Column(db.Integer, unique=True, nullable=False)
-    drink_caffeine = db.Column(db.Integer, unique=True, nullable=False)
+    drink_water = db.Column(db.Integer, nullable=False)
+    drink_energy = db.Column(db.Integer, nullable=False)
+    drink_protein = db.Column(db.Integer,  nullable=False)
+    drink_sugar = db.Column(db.Integer,  nullable=False)
+    drink_caffeine = db.Column(db.Integer, nullable=False)
