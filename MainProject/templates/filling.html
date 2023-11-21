@@ -45,13 +45,16 @@
 <body>
     <form action="/filling" method="post">
         <h2>This is filling page</h2>
-        Your height is ?
-        <input type="number" name="user_height" value="{{user_height}}"><br>
-        Your weight is ?
-        <input type="number"  name="user_weight" value="{{user_weight}}"><br>
-        Your age is ?
-        input type="number" name="user_age" value="{{user_age}}"><br>
-    <button type="submit">Submit!</button>
+        <label>Your height is ?</label>
+        <input type="number" name="user_height" value="{{user_height}}" required>
+        <br>
+        <label>Your weight is ?</label>
+        <input type="number" name="user_weight" value="{{user_weight}}" required>
+        <br>
+        <label>Your age is ?</label>
+        <input type="number" name="user_age" value="{{user_age}}" required>
+        <br>
+        <button type="submit">Submit!</button>
     </form>
 </body>
 </html>
