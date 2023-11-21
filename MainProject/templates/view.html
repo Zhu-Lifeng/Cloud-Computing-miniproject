@@ -2,26 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>This is view page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: linear-gradient(to right, #faaca8, #ddd6f3); /* Gradient background for a feminine touch */
+            color: #6b5b95;
+            text-align: center;
+            margin: 50px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ff7e67; /* Coral color for the title */
+            font-size: 36px;
+        }
+
+        p {
+            color: #4a4e4d; /* Subtle gray color for text */
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #ff7e67; /* Coral color for buttons */
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-right: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #ff5a4b; /* Darker coral color on hover */
+        }
+    </style>
 </head>
 <body>
-This is view page<br>
-Your Height is :{{user.user_height}}<br>
-Your Weight is :{{user.user_weight}}<br>
-Your   Age  is :{{user.user_age}}<br>
-<form action="/main">
-    <button type="submit">Back</button>
+    <h1>User Profile</h1>
 
-</form>
+    <p>This is your user profile:</p>
 
-<form action="/logout">
-    <button type="submit">Log out</button>
-</form>
+    <p>Your Height: {{ user.user_height }}</p>
+    <p>Your Weight: {{ user.user_weight }}</p>
+    <p>Your Age: {{ user.user_age }}</p>
 
-<form action="/filling", >
-    <button type="submit">Edit</button>
+    <form action="/main">
+        <button type="submit">Back</button>
+    </form>
 
-</form>
+    <form action="/logout">
+        <button type="submit">Log out</button>
+    </form>
 
+    <form action="/filling">
+        <button type="submit">Edit</button>
+    </form>
 </body>
 </html>
