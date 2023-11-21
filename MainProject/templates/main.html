@@ -2,129 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main Page</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e0b4ae;
-            color: #333;
-            text-align: center;
-            margin: 50px;
-        }
-
-        h1 {
-            color: #f17465;
-        }
-
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-
-        th {
-            background-color: #da5d53;
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #e0b0aa;
-        }
-
-        form {
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        input {
-            padding: 10px;
-            margin: 5px;
-            width: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #da5d53;
-            color: #fff;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        button:hover {
-            background-color: #da5d53;
-        }
-    </style>
+    <title>This is main page</title>
 </head>
 <body>
-    <h1>Main Page</h1>
-    <p>Welcome, {{ user.user_name }}!</p>
+This is main page.<br>
+User Name:{{user.user_name}}<br>
+User Email:{{user.user_email}}<br>
 
-    <form action="/view">
-        <button type="submit">View</button>
-    </form>
+<form action="/view">
+    <button type="submit">View</button>
+</form>
 
-    <form action="/drink_add" method="POST">
-        <label for="drink_name">Drink's name:</label>
-        <input type="text" name="drink_name" required><br>
+<form action="/drink_add"  method="POST">
+    Drink's name is ?<input type="text" name="drink_name"><br>
+    This drink contains <input type="number" name="drink_water">g of water<br>
+    This drink contains <input type="number" name="drink_energy">kcal of energy<br>
+    This drink contains <input type="number" name="drink_protein">g of protein<br>
+    This drink contains <input type="number" name="drink_sugar">g of sugar<br>
+    This drink contains <input type="number" name="drink_caffeine">mg of caffeine<br>
+    <button type="submit">Submit a new drink!</button>
+</form>
 
-        <label for="drink_water">Water:</label>
-        <input type="number" name="drink_water" required>g of water<br>
+<form action="/result" method="POST">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <!-- 保留选择框 -->
+            <th><input type="checkbox" name="select_water" value="water"> Water</th>
+            <th><input type="checkbox" name="select_energy" value="energy"> Energy</th>
+            <th><input type="checkbox" name="select_protein" value="protein"> Protein</th>
+            <th><input type="checkbox" name="select_sugar" value="sugar"> Sugar</th>
+            <th><input type="checkbox" name="select_caffeine" value="caffeine"> Caffeine</th>
+        </tr>
+        {% for drink in drinks %}
+        <tr>
+            <td>{{ drink.drink_name }}</td>
+            <td><input type="number" name="drink_number_{{ drink.drink_name }}"></td>
+            <!-- 隐藏字段用于提交数据，但不在页面上显示 -->
+            <input type="hidden" name="drink_water_{{drink.drink_name}}" value="{{ drink.drink_water }}">
+            <input type="hidden" name="drink_energy_{{drink.drink_name}}" value="{{ drink.drink_energy }}">
+            <input type="hidden" name="drink_protein_{{drink.drink_name}}" value="{{ drink.drink_protein }}">
+            <input type="hidden" name="drink_sugar_{{drink.drink_name}}" value="{{ drink.drink_sugar }}">
+            <input type="hidden" name="drink_caffeine_{{drink.drink_name}}" value="{{ drink.drink_caffeine }}">
+        </tr>
+        {% endfor %}
+    </table>
+    <button type="submit" name="Cal" value="Cal">Calculate</button>
+</form>
 
-        <label for="drink_energy">Energy:</label>
-        <input type="number" name="drink_energy" required>kcal of energy<br>
+<form action="/logout">
+    <button type="submit">Log out</button>
+</form>
 
-        <label for="drink_protein">Protein:</label>
-        <input type="number" name="drink_protein" required>g of protein<br>
-
-        <label for="drink_sugar">Sugar:</label>
-        <input type="number" name="drink_sugar" required>g of sugar<br>
-
-        <label for="drink_caffeine">Caffeine:</label>
-        <input type="number" name="drink_caffeine" required>mg of caffeine<br>
-
-        <button type="submit">Submit a new drink!</button>
-    </form>
-
-    <form action="/result" method="POST">
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Water</th>
-                <th>Energy</th>
-                <th>Protein</th>
-                <th>Sugar</th>
-                <th>Caffeine</th>
-                <th>Quantity</th>
-            </tr>
-            {% for drink in drinks %}
-            <tr>
-                <td>{{ drink.drink_name }}</td>
-                <td>{{ drink.drink_water }}</td>
-                <td>{{ drink.drink_energy }}</td>
-                <td>{{ drink.drink_protein }}</td>
-                <td>{{ drink.drink_sugar }}</td>
-                <td>{{ drink.drink_caffeine }}</td>
-                <td><input type="number" name="drink_number_{{drink.drink_name}}" value="{{drink.drink_number}}"></td>
-            </tr>
-            {% endfor %}
-        </table>
-        <button type="submit" name="Cal" value="Cal">Calculate</button>
-    </form>
-
-    <form action="/logout">
-        <button type="submit">Log out</button>
-    </form>
 </body>
 </html>
