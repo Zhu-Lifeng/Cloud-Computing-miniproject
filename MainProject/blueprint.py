@@ -116,20 +116,45 @@ def drink_add():
 
 @BP.route('/result', methods=['POST'])
 @login_required
-# 此处需要与数据库联通，暂不清楚是这里拿数据还是在HTML里拿数据
 def result():
-    drinks_selected = []
+    # 获取用户选择的数据类型
+    select_water = 'select_water' in request.form
+    select_energy = 'select_energy' in request.form
+    select_protein = 'select_protein' in request.form
+    select_sugar = 'select_sugar' in request.form
+    select_caffeine = 'select_caffeine' in request.form
+
+    # 初始化计算结果
+    total_water = 0
+    total_energy = 0
+    total_protein = 0
+    total_sugar = 0
+    total_caffeine = 0
+
     for drink in Drink.query.all():
         drink_number_key = f'drink_number_{drink.drink_name}'
         drink_number = request.form.get(drink_number_key)
-        print(drink_number_key, drink_number)
-        if drink_number and int(drink_number) > 0:
-            drink_info = {'id': drink.id, 'name': drink.drink_name, 'water': drink.drink_water,
-                          'energy': drink.drink_energy, 'protein': drink.drink_protein, 'sugar': drink.drink_sugar,
-                          'caffeine': drink.drink_caffeine, 'quantity': drink_number}
-            drinks_selected.append(drink_info)
+        if drink_number:
+            drink_number = int(drink_number)
+            if select_water:
+                total_water += drink.drink_water * drink_number
+            if select_energy:
+                total_energy += drink.drink_energy * drink_number
+            if select_protein:
+                total_protein += drink.drink_protein * drink_number
+            if select_sugar:
+                total_sugar += drink.drink_sugar * drink_number
+            if select_caffeine:
+                total_caffeine += drink.drink_caffeine * drink_number
 
-    return render_template('result.html', drinks=drinks_selected)
+    # 将计算结果传递给模板
+    return render_template('result.html', 
+                           select_water=select_water, total_water=total_water,
+                           select_energy=select_energy, total_energy=total_energy,
+                           select_protein=select_protein, total_protein=total_protein,
+                           select_sugar=select_sugar, total_sugar=total_sugar,
+                           select_caffeine=select_caffeine, total_caffeine=total_caffeine)
+
 
 
 @BP.route('/logout')
