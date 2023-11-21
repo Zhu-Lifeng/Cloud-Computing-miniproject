@@ -2,28 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>This is login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e5aca3;
+            color: #333;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #da5d53;
+        }
+
+        form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #da5d53;
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #f17465;
+        }
+
+        .flash-message {
+            color: #f17465;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-This is login page.<br>
-<form action="/login" method="post">
-    user_email<input type="email" name="user_email"><br>
-    user_password<input type="password" name="user_password"><br>
-    <button type="submit">Log in now!</button>
-</form>
+    <h1>Signup Page</h1>
+    <p>This is the place to create your account.</p>
 
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    {% for message in messages %}
-      <div class="flash-message">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+    <form action="/signup" method="post">
+        <label for="user_name">User Name</label><br>
+        <input type="text" name="user_name" required><br>
 
-<form action="/">
-    <button type="submit">Back</button>
-</form>
+        <label for="user_email">User Email</label><br>
+        <input type="email" name="user_email" required><br>
 
+        <label for="user_password">User Password</label><br>
+        <input type="password" name="user_password" required><br>
 
+        <button type="submit">Sign up now!</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/">
+        <button type="submit">Back</button>
+    </form>
 </body>
 </html>
