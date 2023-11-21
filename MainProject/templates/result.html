@@ -2,41 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>This is result page.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e5aca3;
+            color: #333;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #f17465;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #da5d53; /* Blue header background */
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Alternate row background color */
+        }
+
+        button {
+            background-color: #f17465; /* Blue button */
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
 </head>
 <body>
-This is result page.
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Water</th>
-        <th>Energy</th>
-        <th>Protein</th>
-        <th>Sugar</th>
-        <th>Caffeine</th>
-        <th>Quantity</th>
-  </tr>
-     {% for drink in drinks %}
-  <tr>
-      <td>{{ drink.name }}</td>
-      <td>{{ drink. water}}</td>
-      <td>{{ drink. energy}}</td>
-      <td>{{ drink. protein}}</td>
-      <td>{{ drink. sugar}}</td>
-      <td>{{ drink. caffeine}}</td>
-      <td>{{ drink. quantity}}</td>
-  </tr>
-  {% endfor %}
-</table>
+    <h1>Result Page</h1>
+    
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Water</th>
+            <th>Energy</th>
+            <th>Protein</th>
+            <th>Sugar</th>
+            <th>Caffeine</th>
+            <th>Quantity</th>
+        </tr>
+        {% for drink in drinks %}
+        <tr>
+            <td>{{ drink.name }}</td>
+            <td>{{ drink.water }}</td>
+            <td>{{ drink.energy }}</td>
+            <td>{{ drink.protein }}</td>
+            <td>{{ drink.sugar }}</td>
+            <td>{{ drink.caffeine }}</td>
+            <td>{{ drink.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
-<form action="/main">
-    <button type="submit">Back</button>
-</form>
+    <form action="/main">
+        <button type="submit">Back</button>
+    </form>
 
-<button onclick="window.print();">Print this page</button>
+    <button onclick="window.print();">Print this page</button>
 
-<form action="/logout">
-    <button type="submit">Log out</button>
-</form>
+    <form action="/logout">
+        <button type="submit">Log out</button>
+    </form>
 </body>
 </html>
