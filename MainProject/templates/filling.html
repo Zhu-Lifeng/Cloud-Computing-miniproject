@@ -2,17 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>This is filling page</title>
+    <title>This is filling page</title>    
+    <style>
+        body {
+            font-family: 'Arial';
+            background-color: #c5c0c0;
+            margin: 20px;
+        }   
+
+        form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+         input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-This filling page.
-
-<form action="/filling" method="post">
-    Your height is ?<input type="number" name="user_height" value="{{user_height}}"><br>
-    Your weight is ?<input type="number"  name="user_weight" value="{{user_weight}}"><br>
-    Your  age   is ?<input type="number" name="user_age" value="{{user_age}}"><br>
+    <form action="/filling" method="post">
+        <h2>This is filling page</h2>
+        Your height is ?
+        <input type="number" name="user_height" value="{{user_height}}"><br>
+        Your weight is ?
+        <input type="number"  name="user_weight" value="{{user_weight}}"><br>
+        Your age is ?
+        input type="number" name="user_age" value="{{user_age}}"><br>
     <button type="submit">Submit!</button>
-</form>
-
+    </form>
 </body>
 </html>
