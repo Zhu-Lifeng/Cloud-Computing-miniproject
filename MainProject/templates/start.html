@@ -2,16 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>This is start page.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the Start Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f5f2;
+            color: #464646;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #d75a4a;
+        }
+
+        button {
+            background-color: #d75a4a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #a64336;
+        }
+    </style>
 </head>
 <body>
-This is start page.
-<form action="/login">
-    <button type="submit">Login</button>
-</form>
+    <h1>Welcome to the Start Page</h1>
 
-<form action="/signup">
-    <button type="submit">Signup</button>
-</form>
+    <p>This is the place to begin your journey.</p>
+
+    <form action="/login">
+        <button type="submit">Login</button>
+    </form>
+
+    <form action="/signup">
+        <button type="submit">Signup</button>
+    </form>
 </body>
 </html>
