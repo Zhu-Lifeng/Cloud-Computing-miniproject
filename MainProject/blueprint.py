@@ -46,7 +46,7 @@ def signup_post():
         return redirect(url_for('my_blueprint.signup'))
 
     NEW_USER = User(user_email=USER_email, user_name=USER_name,
-                    user_password=generate_password_hash(USER_password, method='sha256'),
+                    user_password=generate_password_hash(USER_password, method='pbkdf2:sha256'),
                     user_weight=80, user_height=180, user_age=25)
 
     # 这里把新用户数据传到数据库里
