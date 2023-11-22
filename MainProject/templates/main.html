@@ -40,11 +40,6 @@ User Email:{{user.user_email}}<br>
             <td>{{ drink.drink_name }}</td>
             <td><input type="number" name="drink_number_{{ drink.drink_name }}"></td>
             <!-- 隐藏字段用于提交数据，但不在页面上显示 -->
-            <input type="hidden" name="drink_water_{{drink.drink_name}}" value="{{ drink.drink_water }}">
-            <input type="hidden" name="drink_energy_{{drink.drink_name}}" value="{{ drink.drink_energy }}">
-            <input type="hidden" name="drink_protein_{{drink.drink_name}}" value="{{ drink.drink_protein }}">
-            <input type="hidden" name="drink_sugar_{{drink.drink_name}}" value="{{ drink.drink_sugar }}">
-            <input type="hidden" name="drink_caffeine_{{drink.drink_name}}" value="{{ drink.drink_caffeine }}">
         </tr>
         {% endfor %}
     </table>
