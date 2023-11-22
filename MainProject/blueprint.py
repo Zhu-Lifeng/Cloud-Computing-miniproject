@@ -131,21 +131,26 @@ def result():
     total_sugar = 0
     total_caffeine = 0
 
-    for drink in Drink.query.all():
+    for drink in Drink.query.with_entities(Drink.drink_name).all():
         drink_number_key = f'drink_number_{drink.drink_name}'
         drink_number = request.form.get(drink_number_key)
         if drink_number:
             drink_number = int(drink_number)
             if select_water:
-                total_water += drink.drink_water * drink_number
+                DRINK_water = Drink.query.with_entities(Drink.drink_water).filter_by(drink_name=drink.drink_name).first()
+                total_water += DRINK_water.drink_water * drink_number
             if select_energy:
-                total_energy += drink.drink_energy * drink_number
+                DRINK_energy = Drink.query.with_entities(Drink.drink_energy).filter_by(drink_name=drink.drink_name).first()
+                total_energy += DRINK_energy.drink_energy * drink_number
             if select_protein:
-                total_protein += drink.drink_protein * drink_number
+                DRINK_protein = Drink.query.with_entities(Drink.drink_protein).filter_by(drink_name=drink.drink_name).first()
+                total_protein += DRINK_protein.drink_protein * drink_number
             if select_sugar:
-                total_sugar += drink.drink_sugar * drink_number
+                DRINK_sugar = Drink.query.with_entities(Drink.drink_sugar).filter_by(drink_name=drink.drink_name).first()
+                total_sugar += DRINK_sugar.drink_sugar * drink_number
             if select_caffeine:
-                total_caffeine += drink.drink_caffeine * drink_number
+                DRINK_caffeine = Drink.query.with_entities(Drink.drink_caffeine).filter_by(drink_name=drink.drink_name).first()
+                total_caffeine += DRINK_caffeine.drink_caffeine * drink_number
 
     # 将计算结果传递给模板
     return render_template('result.html', 
