@@ -40,6 +40,7 @@ User Email:{{user.user_email}}<br>
             <td>{{ drink.drink_name }}</td>
             <td><input type="number" name="drink_number_{{ drink.drink_name }}"></td>
             <!-- 隐藏字段用于提交数据，但不在页面上显示 -->
+            <!--前面改动了调用，只调用名字就不需要那些隐藏信息的显示了-->
         </tr>
         {% endfor %}
     </table>
