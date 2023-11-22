@@ -81,7 +81,7 @@ def filling_post():
 @BP.route('/main')
 @login_required
 def main():
-    return render_template('main.html', user=current_user, drinks=Drink.query.all())
+    return render_template('main.html', user=current_user, drinks=Drink.query.with_entities(Drink.drink_name).all())
 
 
 @BP.route('/view')
