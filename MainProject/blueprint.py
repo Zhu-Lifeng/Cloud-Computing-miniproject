@@ -4,13 +4,25 @@ from .drink_class import Drink
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from . import db
-
+import requests
+from PIL import Image
 BP = Blueprint('my_blueprint', __name__)
+
+
+def picture():
+    image_default = Image.open("MainProject/Asset/maxresdefault.jpg")
+    response = requests.get("https://coffee.alexflipnote.dev/random.json")
+    if response.status_code == 200:
+        data = response.json()
+        return data['file']
+    else:
+
+        return image_default
 
 
 @BP.route('/login')
 def login():
-    return render_template('login.html')
+    return render_template('login.html', P=picture())
 
 
 @BP.route('/login', methods=['POST'])
@@ -30,7 +42,7 @@ def login_post():
 
 @BP.route('/signup')
 def signup():
-    return render_template('signup.html')
+    return render_template('signup.html', P=picture())
 
 
 @BP.route('/signup', methods=['POST'])
@@ -60,7 +72,7 @@ def signup_post():
 @BP.route('/filling')
 @login_required
 def filling():
-    return render_template('filling.html', user=current_user)
+    return render_template('filling.html', user=current_user, P=picture())
 
 
 @BP.route('/filling', methods=['POST'])
@@ -81,13 +93,13 @@ def filling_post():
 @BP.route('/main')
 @login_required
 def main():
-    return render_template('main.html', user=current_user, drinks=Drink.query.with_entities(Drink.drink_name).all())
+    return render_template('main.html', user=current_user, drinks=Drink.query.with_entities(Drink.drink_name).all(), P=picture())
 
 
 @BP.route('/view')
 @login_required
 def view():
-    return render_template('view.html', user=current_user)  # , name=current_user.user_name)
+    return render_template('view.html', user=current_user, P=picture())  # , name=current_user.user_name)
 
 
 @BP.route('/drink_add', methods=['POST'])
@@ -153,7 +165,7 @@ def result():
                 total_caffeine += DRINK_caffeine.drink_caffeine * drink_number
 
     # 将计算结果传递给模板
-    return render_template('result.html', 
+    return render_template('result.html', P=picture(),
                            select_water=select_water, total_water=total_water,
                            select_energy=select_energy, total_energy=total_energy,
                            select_protein=select_protein, total_protein=total_protein,
