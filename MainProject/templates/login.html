@@ -2,109 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup Page</title>
+    <title>This is login page</title>
     <style>
-        /* Original CSS style */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #1a1a1a; /* dark background */
-            color: #fff; /* bright text */
+            font-family: 'Arial';
             text-align: center;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 50px 0;
+
+        }.background-container {
+            position:  relative;
+            height: 100vh;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: 100% 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
         }
 
-        h1 {
-            color: #4CAF50; /* embellishment color */
+        .white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.4); /* 调整透明度 */
+            z-index:1;}
+        p{z-index: 2;position: relative;}
+        h1 {position: relative;
+            color: #ff7e67;
+            margin-top: 20px;
+            font-size: 36px;
+            z-index:2;
         }
 
         form {
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin-top: 20px;
-        }
-
-        input {
-            padding: 10px;
-            margin: 10px 0;
-            width: 200px;
-            border: 1px solid #555; /* border color */
-            background-color: #333; /* Input box background color */
-            color: #fff; /* Input box text color */
-            border-radius: 5px;
-            transition: all 0.3s ease; /* smooth transition effect */
+            z-index:2;
         }
 
         button {
-            background-color: #4CAF50; /* button color */
-            color: #fff;
-            padding: 12px 24px;
+        position: relative;
+            background-color: #ff7e67; 
+            padding: 10px 15px;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease-in-out;
+            margin-top: 10px;
+            color: white; 
+            font-weight: bold;
+            z-index:2;
         }
 
         button:hover {
-            background-color: #66BB6A; /* Button hover effect */
-            animation: jelly 0.2s ease; /* Jelly effect
- */
+            background-color: #FF1493; 
         }
 
-        .flash-message {
-            color: #66BB6A;
-            margin-top: 10px;
+        input {
+        position: relative;
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+            border: 1px solid #FFF;
+            border-radius: 5px;
+            z-index:2;
         }
-
-        /* Jelly effect animation */
-        @keyframes jelly {
-            0%, 100% {
-                transform: scale(1);
-            }
-            25% {
-                transform: scale(1.25, 0.75);
-            }
-            50% {
-                transform: scale(0.75, 1.25);
-            }
-            75% {
-                transform: scale(1.15, 0.85);
-            }
-        }
-
-        /* Jelly effect when input box is focused */
-        input:focus {
-            animation: jelly 0.2s ease;
-            outline: none; /* Remove default outline */
-        }
-
     </style>
 </head>
 <body>
-    <h1>Signup Page</h1>
-    <p>This is the place to create your account.</p>
+     <div class="background-container">
 
-    <form action="/signup" method="post">
-        <label for="user_name">User Name</label><br>
-        <input type="text" id="user_name" name="user_name" required><br>
+        <h1>This is login page.</h1>
+        <form action="/login" method="post">
+            <p>user_email</p><input type="email" name="user_email"><br>
+            <p>user_password</p><input type="password" name="user_password"><br>
+            <button type="submit">Log in now!</button>
+        </form>
 
-        <label for="user_email">User Email</label><br>
-        <input type="email" id="user_email" name="user_email" required><br>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
-        <label for="user_password">User Password</label><br>
-        <input type="password" id="user_password" name="user_password" required><br>
-
-        <button type="submit">Sign up now!</button>
-    </form>
-
-    <!-- Flash messages will appear here -->
-    <!-- Example:
-    <div class="flash-message">Registration successful!</div>
-    -->
-
-    <form action="/">
-        <button type="submit">Back</button>
-    </form>
+        <form action="/">
+            <button type="submit">Back</button>
+        </form>
+    </div><div class="white-overlay"></div>
 </body>
 </html>

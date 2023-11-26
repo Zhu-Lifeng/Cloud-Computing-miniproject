@@ -7,30 +7,51 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e17d71;
-            color: #FFF;
             text-align: center;
             margin: 50px;
+        }.background-container {
+            position: relative;
+            height: 100vh;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: 100% 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
         }
+
+        .white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.4); /* 调整透明度 */
+              z-index:1;}
 
         h1 {
             color: #D75A4AFF;
+            position: relative;
+            z-index: 2;
         }
-
+        p{z-index: 2;position: relative;}
+        label{z-index: 2;position: relative;}
         form {
             display: inline-block;
             margin-top: 20px;
+              z-index:2;
         }
 
         input {
+        position: relative;
             padding: 10px;
             margin: 5px;
             width: 200px;
             border: 1px solid #FFF;
             border-radius: 5px;
+              z-index:2;
         }
 
         button {
+        position: relative;
             background-color: #D75A4AFF;
             color: #FFF;
             padding: 12px 24px;
@@ -40,6 +61,7 @@
             font-size: 16px;
             margin-top: 10px;
             transition: background-color 0.3s ease-in-out;
+              z-index:2;
         }
 
         button:hover {
@@ -53,6 +75,8 @@
     </style>
 </head>
 <body>
+ <div class="background-container">
+
     <h1>Signup Page</h1>
     <p>This is the place to create your account.</p>
 
@@ -79,6 +103,7 @@
 
     <form action="/">
         <button type="submit">Back</button>
-    </form>
+    </form> <div class="white-overlay"></div>
+ </div>
 </body>
 </html>

@@ -3,27 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>This is main page</title>
+    <style>
+        body {
+
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            height: 100vh;
+
+        }.background-container {
+            position: relative;
+            height: 100vh;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: 100% 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.4); /* 调整透明度 */
+              z-index:1;}
+
+        form, table, img {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            z-index:2;
+        }
+        h1{z-index: 2;position: relative;
+            font-weight: bold;
+            color: #ff7e67;
+        }
+        p{z-index: 2;position: relative;}
+        button[type="submit"] {
+        position: relative;
+            background-color: #ff7e67; 
+            color: white; 
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+              z-index:2;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ff5c49; 
+        }
+    </style>
 </head>
 <body>
-This is main page.<br>
-User Name:{{user.user_name}}<br>
-User Email:{{user.user_email}}<br>
+ <div class="background-container">
+
+<h1>This is main page.</h1><br>
+     <p>User Name:{{user.user_name}}</p><br>
+<p>User Email:{{user.user_email}}</p><br>
 
 <form action="/view">
     <button type="submit">View</button>
 </form>
-<img src="{{P}}">
-<form action="/drink_add"  method="POST">
-    Drink's name is ?<input type="text" name="drink_name"><br>
-    This drink contains <input type="number" name="drink_water">g of water<br>
-    This drink contains <input type="number" name="drink_energy">kcal of energy<br>
-    This drink contains <input type="number" name="drink_protein">g of protein<br>
-    This drink contains <input type="number" name="drink_sugar">g of sugar<br>
-    This drink contains <input type="number" name="drink_caffeine">mg of caffeine<br>
-    <button type="submit">Submit a new drink!</button>
+<form action="/drink_add" method="POST">
+    <div style="margin-top: 20px; padding: 20px; background-color: white; border-radius: 10px;z-index: 2;position: relative;">
+        <!-- 饮料提交表单内的输入字段 -->
+        Drink's name is ? <input type="text" name="drink_name"><br>
+        This drink contains <input type="number" name="drink_water">g of water<br>
+        This drink contains <input type="number" name="drink_energy">kcal of energy<br>
+        This drink contains <input type="number" name="drink_protein">g of protein<br>
+        This drink contains <input type="number" name="drink_sugar">g of sugar<br>
+        This drink contains <input type="number" name="drink_caffeine">mg of caffeine<br>
+
+        <div style="display: flex; justify-content: center;z-index: 2;position: relative;">
+            <button type="submit" style="background-color: #ff7e67; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;z-index: 2;position: relative;">Submit a new drink!</button>
+        </div>
+    </div>
+
 </form>
 
-<form action="/result" method="POST">
+<form action="/result" method="POST" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px; padding: 20px; background-color: white; border-radius: 10px;z-index: 2;position: relative;">
     <table>
         <tr>
             <th>Name</th>
@@ -43,12 +106,12 @@ User Email:{{user.user_email}}<br>
         </tr>
         {% endfor %}
     </table>
-    <button type="submit" name="Cal" value="Cal">Calculate</button>
+    <button type="submit" name="Cal" value="Cal" style="background-color: #ff7e67; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;z-index: 2;position: relative;">Calculate</button>
 </form>
 
 <form action="/logout">
     <button type="submit">Log out</button>
-</form>
-
+</form> <div class="white-overlay"></div>
+ </div>
 </body>
 </html>
