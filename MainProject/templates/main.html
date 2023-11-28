@@ -5,13 +5,12 @@
     <title>This is main page</title>
     <style>
         body {
-
             align-items: center;
             justify-content: flex-start;
             margin: 0;
             height: 100vh;
-
-        }.background-container {
+        }
+        .background-container {
             position: relative;
             height: 100vh;
             background-image: url('{{ url_for('static', filename='background.jpg') }}');
@@ -19,30 +18,26 @@
             background-position: center center;
             background-repeat: no-repeat;
         }
-
-        .white-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.4); /* 调整透明度 */
-              z-index:1;}
-
+        
         form, table, img {
             margin-top: 20px;
             padding: 20px;
             background-color: white;
             border-radius: 10px;
-            z-index:2;
+            z-index: 2;
         }
-        h1{z-index: 2;position: relative;
+        h1 {
+            z-index: 2;
+            position: relative;
             font-weight: bold;
             color: #ff7e67;
         }
-        p{z-index: 2;position: relative;}
-        button[type="submit"] {
-        position: relative;
+        p {
+            z-index: 2;
+            position: relative;
+        }
+        button[type="submit"], button[type="button"] {
+            position: relative;
             background-color: #ff7e67; 
             color: white; 
             border: none;
@@ -51,67 +46,78 @@
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s ease;
-              z-index:2;
+            z-index: 2;
         }
-
-        button[type="submit"]:hover {
-            background-color: #ff5c49; 
+        button[type="submit"]:hover, button[type="button"]:hover {
+            background-color: #ff5c49;
         }
     </style>
 </head>
 <body>
- <div class="background-container">
+    <div class="background-container">
 
-<h1>This is main page.</h1><br>
-     <p>User Name:{{user.user_name}}</p><br>
-<p>User Email:{{user.user_email}}</p><br>
-
-<form action="/view">
-    <button type="submit">View</button>
-</form>
-<form action="/drink_add" method="POST">
-    <div style="margin-top: 20px; padding: 20px; background-color: white; border-radius: 10px;z-index: 2;position: relative;">
-        <!-- 饮料提交表单内的输入字段 -->
-        Drink's name is ? <input type="text" name="drink_name"><br>
-        This drink contains <input type="number" name="drink_water">g of water<br>
-        This drink contains <input type="number" name="drink_energy">kcal of energy<br>
-        This drink contains <input type="number" name="drink_protein">g of protein<br>
-        This drink contains <input type="number" name="drink_sugar">g of sugar<br>
-        This drink contains <input type="number" name="drink_caffeine">mg of caffeine<br>
-
-        <div style="display: flex; justify-content: center;z-index: 2;position: relative;">
-            <button type="submit" style="background-color: #ff7e67; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;z-index: 2;position: relative;">Submit a new drink!</button>
+        <h1>This is main page.</h1><br>
+        <p>User Name:{{user.user_name}}</p><br>
+        <p>User Email:{{user.user_email}}</p><br>
+        <!-- 新增的折叠表单切换按钮 -->
+        <button type="button" onclick="toggleDrinkForm()">Toggle Drink Form</button>
+        <!-- 折叠的饮料提交表单，初始设为隐藏 -->
+        <div id="drinkForm" style="display: none;">
+            <form action="/drink_add" method="POST">
+                Drink's name is ? <input type="text" name="drink_name"><br>
+                This drink contains <input type="number" name="drink_water">g of water<br>
+                This drink contains <input type="number" name="drink_energy">kcal of energy<br>
+                This drink contains <input type="number" name="drink_protein">g of protein<br>
+                This drink contains <input type="number" name="drink_sugar">g of sugar<br>
+                This drink contains <input type="number" name="drink_caffeine">mg of caffeine<br>
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit">Submit a new drink!</button>
+                </div>
+            </form>
         </div>
+
+        
+
+        <form action="/result" method="POST" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px; padding: 20px; background-color: white; border-radius: 10px;z-index: 2;position: relative;">
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <!-- 保留选择框 -->
+                    <th><input type="checkbox" name="select_water" value="water"> Water</th>
+                    <th><input type="checkbox" name="select_energy" value="energy"> Energy</th>
+                    <th><input type="checkbox" name="select_protein" value="protein"> Protein</th>
+                    <th><input type="checkbox" name="select_sugar" value="sugar"> Sugar</th>
+                    <th><input type="checkbox" name="select_caffeine" value="caffeine"> Caffeine</th>
+                </tr>
+                {% for drink in drinks %}
+                <tr>
+                    <td>{{ drink.drink_name }}</td>
+                    <td><input type="number" name="drink_number_{{ drink.drink_name }}"></td>
+                    <!-- 隐藏字段用于提交数据，但不在页面上显示 -->
+                </tr>
+                {% endfor %}
+            </table>
+            <button type="submit" name="Cal" value="Cal" style="background-color: #ff7e67; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;z-index: 2;position: relative;">Calculate</button>
+        </form>
+        
+        <form action="/logout">
+            <button type="submit">Log out</button>
+        </form> <div class="white-overlay"></div>
+
+        <div class="white-overlay"></div>
     </div>
 
-</form>
-
-<form action="/result" method="POST" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px; padding: 20px; background-color: white; border-radius: 10px;z-index: 2;position: relative;">
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Quantity</th>
-            <!-- 保留选择框 -->
-            <th><input type="checkbox" name="select_water" value="water"> Water</th>
-            <th><input type="checkbox" name="select_energy" value="energy"> Energy</th>
-            <th><input type="checkbox" name="select_protein" value="protein"> Protein</th>
-            <th><input type="checkbox" name="select_sugar" value="sugar"> Sugar</th>
-            <th><input type="checkbox" name="select_caffeine" value="caffeine"> Caffeine</th>
-        </tr>
-        {% for drink in drinks %}
-        <tr>
-            <td>{{ drink.drink_name }}</td>
-            <td><input type="number" name="drink_number_{{ drink.drink_name }}"></td>
-            <!-- 隐藏字段用于提交数据，但不在页面上显示 -->
-        </tr>
-        {% endfor %}
-    </table>
-    <button type="submit" name="Cal" value="Cal" style="background-color: #ff7e67; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;z-index: 2;position: relative;">Calculate</button>
-</form>
-
-<form action="/logout">
-    <button type="submit">Log out</button>
-</form> <div class="white-overlay"></div>
- </div>
+    <script>
+        // JavaScript 用于切换表单显示
+        function toggleDrinkForm() {
+            var form = document.getElementById('drinkForm');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
