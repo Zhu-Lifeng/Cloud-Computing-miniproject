@@ -19,7 +19,7 @@
             background-repeat: no-repeat;
         }
         
-        form, table, img {
+        form, img {
             margin-top: 20px;
             padding: 20px;
             background-color: white;
@@ -51,6 +51,38 @@
         button[type="submit"]:hover, button[type="button"]:hover {
             background-color: #ff5c49;
         }
+        .Atable {
+            max-height: 300px; /* 设置最大高度 */
+            overflow-y: scroll; /* 启用垂直滚动条 */
+            display: block; /* 使表格以块级元素显示 */
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1); margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            z-index: 2;
+        }
+        .Btable{
+            display: block; /* 使表格以块级元素显示 */
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1); margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            z-index: 2;}
+        th, td {
+            border: 1px solid #ddd; /* 添加边框样式 */
+            padding: 8px; /* 添加内边距 */
+            text-align: left; /* 左对齐文本 */
+        }
+
+
+
+
     </style>
 </head>
 <body>
@@ -76,25 +108,34 @@
             </form>
         </div>
 
-        
 
-        <form action="/result" method="POST" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px; padding: 20px; background-color: white; border-radius: 10px;z-index: 2;position: relative;">
+
+
+
+        <form action="/result" method="POST" style="display: flex; justify-content: center; align-items: center; flex-direction: column;
+        margin-top: 20px; padding: 20px; background-color: white; border-radius: 10px;z-index: 2;position: relative;">
             <table>
                 <tr>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <!-- 保留选择框 -->
-                    <th><input type="checkbox" name="select_water" value="water"> Water</th>
+                <th><input type="checkbox" name="select_water" value="water"> Water</th>
                     <th><input type="checkbox" name="select_energy" value="energy"> Energy</th>
                     <th><input type="checkbox" name="select_protein" value="protein"> Protein</th>
                     <th><input type="checkbox" name="select_sugar" value="sugar"> Sugar</th>
                     <th><input type="checkbox" name="select_caffeine" value="caffeine"> Caffeine</th>
                 </tr>
+            </table>
+            <input type="text" id="myInput" onkeyup="searchTable()" placeholder="Search for names...">
+            <table class="Atable" id="maintable">
+                <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <!-- 保留选择框 -->
+
+                </tr>
                 {% for drink in drinks %}
                 <tr>
                     <td>{{ drink.drink_name }}</td>
-                    <td><input type="number" name="drink_number_{{ drink.drink_name }}"></td>
-                    <!-- 隐藏字段用于提交数据，但不在页面上显示 -->
+                    <td><input type="number" name="drink_number_{{ drink.drink_name }}">g</td>
+
                 </tr>
                 {% endfor %}
             </table>
@@ -118,6 +159,26 @@
                 form.style.display = 'none';
             }
         }
+
+        function searchTable() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("maintable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0]; // 这里假设搜索的是第一列（Name列）
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
     </script>
 </body>
 </html>
