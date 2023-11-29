@@ -6,7 +6,9 @@ from wtforms.validators import DataRequired, Length, EqualTo
 # 下面这2行要用最终选定的数据库的导入方式替代，此处用SQLite的暂存
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
+
 
 def App_Creation():
     app = Flask(__name__)
@@ -20,14 +22,15 @@ def App_Creation():
     app.config['SECRET_KEY'] = '19980706'
     db.init_app(app)
 
-
-
     from .user_class import User
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(user_id)
 
     from .drink_class import Drink
+    def index():
+        drinks = Drink.query.all()  # 查询所有饮料
+        return render_template('main.html', drinks=drinks)
 
     def drink(drink_id):
         return Drink.query.get(drink_id)
@@ -37,6 +40,5 @@ def App_Creation():
 
     from .start import BPstart
     app.register_blueprint(BPstart)
-
 
     return app
