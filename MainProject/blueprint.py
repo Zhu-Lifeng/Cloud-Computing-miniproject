@@ -68,7 +68,7 @@ def signup_post():
 
     NEW_USER = User(user_email=USER_email, user_name=USER_name,
                     user_password=generate_password_hash(USER_password, method='pbkdf2:sha256'),
-                    user_weight=80, user_height=180, user_age=25)
+                    user_weight=80, user_height=180, user_age=25, user_gender ='X')
 
     # 这里把新用户数据传到数据库里
     db.session.add(NEW_USER)
@@ -92,7 +92,7 @@ def filling_post():
     current_user.user_weight = request.form.get('user_weight')
     current_user.user_height = request.form.get('user_height')
     current_user.user_age = request.form.get('user_age')
-
+    current_user.user_gender = request.form.get('user_gender')
     db.session.commit()
 
     # 这里要把用户数据更新到数据库里
@@ -162,28 +162,69 @@ def result():
             drink_number = int(drink_number)
             if select_water:
                 DRINK_water = Drink.query.with_entities(Drink.drink_water).filter_by(drink_name=drink.drink_name).first()
-                total_water += DRINK_water.drink_water * drink_number
+                total_water += DRINK_water.drink_water * drink_number/100
             if select_energy:
                 DRINK_energy = Drink.query.with_entities(Drink.drink_energy).filter_by(drink_name=drink.drink_name).first()
-                total_energy += DRINK_energy.drink_energy * drink_number
+                total_energy += DRINK_energy.drink_energy * drink_number/100
             if select_protein:
                 DRINK_protein = Drink.query.with_entities(Drink.drink_protein).filter_by(drink_name=drink.drink_name).first()
-                total_protein += DRINK_protein.drink_protein * drink_number
+                total_protein += DRINK_protein.drink_protein * drink_number/100
             if select_sugar:
                 DRINK_sugar = Drink.query.with_entities(Drink.drink_sugar).filter_by(drink_name=drink.drink_name).first()
-                total_sugar += DRINK_sugar.drink_sugar * drink_number
+                total_sugar += DRINK_sugar.drink_sugar * drink_number/100
             if select_caffeine:
                 DRINK_caffeine = Drink.query.with_entities(Drink.drink_caffeine).filter_by(drink_name=drink.drink_name).first()
-                total_caffeine += DRINK_caffeine.drink_caffeine * drink_number
+                total_caffeine += DRINK_caffeine.drink_caffeine * drink_number/100
+
+
+    water_suggestion = ''
+    energy_suggestion = ''
+    protein_suggestion = ''
+    sugar_suggestion = ''
+    caffeine_suggestion = ''
+    if current_user.user_gender == "male":
+        F=5
+    else:
+        F=-161
+
+    if select_water:
+        recommand_water = current_user.user_weight*35
+        if recommand_water > total_water :
+            water_suggestion = 'You need intake more water! Your water intake today is ' + str(recommand_water - total_water)+'g less than the recommandation.'
+        else:
+            water_suggestion = 'Congratulation! Your water intake is enough for the day!'
+    if select_energy:
+        recommand_energy = current_user.user_weight*10+current_user.user_height*6.25-current_user.user_age*5+F
+        if recommand_energy/2 < total_energy:
+            energy_suggestion = ('The energy you intake from the beverages has exceeded half of your daily need! '
+                                 'Please control your beverages intake.')
+        else:
+            energy_suggestion = f'You get {(total_energy/recommand_energy*100):.1f} % of your daily energy from beverages.'
+    if select_protein:
+        recommand_protein = current_user.user_weight*1.5
+        protein_suggestion = f'You get {(total_protein/recommand_protein*100):.1f} % of your daily protein from beverages.'
+    if select_sugar:
+        recommand_sugar = (current_user.user_weight*10+current_user.user_height*6.25-current_user.user_age*5+F)*0.05
+        if recommand_sugar/2 < total_sugar:
+            sugar_suggestion = ('The sugar you intake from the beverages has exceeded half of your daily need! '
+                                 'Please control your beverages intake.')
+        else:
+            sugar_suggestion = f'You get {(total_sugar/recommand_sugar*100):.1f} % of your daily energy from beverages.'
+    if select_caffeine:
+        recommand_caffeine = 400
+        caffeine_suggestion = f'You get {(total_caffeine/recommand_caffeine*100):.1f} % of your daily caffeine intake recommandation from beverages.'
 
     # 将计算结果传递给模板
-    picture()
+
     return render_template('result.html',
                            select_water=select_water, total_water=total_water,
                            select_energy=select_energy, total_energy=total_energy,
                            select_protein=select_protein, total_protein=total_protein,
                            select_sugar=select_sugar, total_sugar=total_sugar,
-                           select_caffeine=select_caffeine, total_caffeine=total_caffeine)
+                           select_caffeine=select_caffeine, total_caffeine=total_caffeine,
+                           water_suggestion=water_suggestion,energy_suggestion=energy_suggestion,protein_suggestion=protein_suggestion,
+                           sugar_suggestion=sugar_suggestion,caffeine_suggestion=caffeine_suggestion
+    )
 
 
 
