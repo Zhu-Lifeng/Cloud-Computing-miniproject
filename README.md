@@ -2,5 +2,5 @@
 
 <B>Architecture</B>
 <p align="center">
-  <img width="700" src="https://github.com/Zhu-Lifeng/Cloud-Computing-miniproject/Readme/p1.png" alt="Architecture">
+  <img width="700" src="https://github.com/Zhu-Lifeng/Cloud-Computing-miniproject/blob/Readme/p1.png" alt="Architecture">
 </p>
