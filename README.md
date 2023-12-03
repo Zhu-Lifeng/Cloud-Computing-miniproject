@@ -90,3 +90,6 @@ Besides, if you click the "View my personal information" button, you will view y
 <p align="center">
   <img width="700" src="https://github.com/Zhu-Lifeng/Cloud-Computing-miniproject/blob/main/Readme/p9.png" alt="Architecture">
 </p>
+
+# External API
+You should notice that everytime we change to another page, the background picture is changing too. Because everytime we load a new page, the application will ask the coffee API for a random picture about coffee, and that picture will become the background of next page.
