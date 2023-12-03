@@ -14,7 +14,7 @@
   ```sh
   sudo apt−get update
   sudo apt install python3-pip
-  pip3 install git
+  sudo apt install install git
   ```
 
 ## 3. download the application files from git<br>
@@ -26,13 +26,14 @@
 ## 4. finish the library installation<br>
 
   ```sh
+  cd Cloud-Computing-miniproject
   pip install -r requirements.txt
   ```
 
 ## 5. run the trigger, start the application<br>
 
   ```sh
-  python3 MainProject/main.py
+  python3 main.py
   ```
 
 # System Overview and function introduction<br>
