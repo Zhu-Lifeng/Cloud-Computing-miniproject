@@ -1,3 +1,4 @@
+User
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,49 +7,40 @@
     <style>
         body {
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
+            display: flex;
             margin: 0;
             height: 100vh;
-        }
-        .background-container {
-            position: relative;
-            height: 100vh;
             background-image: url('{{ url_for('static', filename='background.jpg') }}');
-            background-size: 100% 100%;
+            background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
         }
         
-        form, img {
-            margin-top: 20px;
+        .container {
+            text-align: center;
             padding: 20px;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.6);
             border-radius: 10px;
             z-index: 2;
         }
-        h1 {
-            z-index: 2;
-            position: relative;
-            font-weight: bold;
-            color: #ff7e67;
+
+        h1, p, button {
+            margin: 10px;
         }
-        p {
-            z-index: 2;
-            position: relative;
-        }
-        button[type="submit"], button[type="button"] {
-            position: relative;
-            background-color: #ff7e67; 
-            color: white; 
+
+        button {
+            background-color: #ff7e67;
+            color: white;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s ease;
-            z-index: 2;
         }
-        button[type="submit"]:hover, button[type="button"]:hover {
+
+        button:hover {
             background-color: #ff5c49;
         }
         .Atable {
@@ -86,7 +78,7 @@
     </style>
 </head>
 <body>
-    <div class="background-container">
+    <div class="container">
 
         <h1>This is main page.</h1><br>
         <p>User Name:{{user.user_name}}</p><br>
@@ -181,4 +173,4 @@
     }
     </script>
 </body>
-</html>
+</html> 
