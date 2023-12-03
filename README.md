@@ -1,10 +1,10 @@
 <h1 align="center">Bevervage Nutrition Calculator Application based on Flask using Coffee API</h1>
 
-<B>Architecture</B>
+<B style="font-size: 50px;">Architecture</B>
 <p align="center">
   <img width="700" src="https://github.com/Zhu-Lifeng/Cloud-Computing-miniproject/blob/main/Readme/p1.png" alt="Architecture">
 </p>
-<B>How to Install</B><br>
+<B style="font-size: 50px;">How to Install</B><br>
 1. make sure you have connected to your GCP instance.<br>
 2. finish the initial setting and installation.<br>
 
