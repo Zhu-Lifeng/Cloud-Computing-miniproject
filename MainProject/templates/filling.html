@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>This is filling page</title>    
+    <title>Nutrient Intake Calculator</title>
     <style>
         body {
             font-family: 'Arial';text-align: center;
-        }   .background-container {
+        }
+        .background-container {
             position: relative;
             height: 100vh;
             background-image: url('{{ url_for('static', filename='background.jpg') }}');
@@ -14,16 +15,15 @@
             background-position: center center;
             background-repeat: no-repeat;
         }
-
         .white-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.4); /* 调整透明度 */
-            z-index: 1;}
-
+            background-color: rgba(255, 255, 255, 0.4);
+            z-index: 1;
+        }
         form {
             max-width: 400px;
             margin: 20px auto;
@@ -35,13 +35,13 @@
             flex-direction: column;
             align-items: center;
         }
-        p{z-index: 2;position: relative;}
-        h2 {
+        p, h2 {
+            z-index: 2;
+            position: relative;
             color: #ff7e67; 
         }
-
-        input {
-        position: relative;
+        input, select {
+            position: relative;
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -49,11 +49,9 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             z-index: 2;
-
         }
-
         button {
-        position: relative;
+            position: relative;
             background-color: #ff7e67; 
             color: #fff;
             padding: 10px 15px;
@@ -63,29 +61,45 @@
             font-weight: bold;
             z-index: 2;
         }
-
         button:hover {
             background-color: #ff5c49; 
         }
     </style>
+    <script>
+        function calculateNutrition() {
+            var weight = parseFloat(document.getElementById('user_weight').value);
+            var height = parseFloat(document.getElementById('user_height').value);
+            var age = parseInt(document.getElementById('user_age').value);
+            var gender = document.getElementById('user_gender').value;
+
+            // ...JavaScript 计算代码保持不变...
+        }
+    </script>
 </head>
 <body>
- <div class="background-container">
-
-    <form action="/filling" method="post">
-        <h2>This is filling page</h2> 
-        <label>Your height is ?</label>
-        <input type="number" name="user_height" value="{{user_height}}" required>
-        <br>
-        <label>Your weight is ?</label>
-        <input type="number" name="user_weight" value="{{user_weight}}" required>
-        <br>
-        <label>Your age is ?</label>
-        <input type="number" name="user_age" value="{{user_age}}" required>
-        <br>
-        <button type="submit">Submit!</button>
-    </form>
+    <div class="background-container">
         <div class="white-overlay"></div>
-     </div>
+        <form onsubmit="return false;">
+            <h2>Nutrient Intake Calculator</h2>
+            <input type="number" id="user_height" name="user_height" placeholder="Height (cm)">
+            <input type="number" id="user_weight" name="user_weight" placeholder="Weight (kg)">
+            <input type="number" id="user_age" name="user_age" placeholder="Age">
+            <select id="user_gender" name="user_gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <button type="button" onclick="calculateNutrition()">Calculate</button>
+        </form>
+
+        <div id="nutrition_results">
+            <p id="bmr_result"></p>
+            <p id="protein_result"></p>
+            <p id="fat_result"></p>
+            <p id="carb_result"></p>
+            <p id="water_result"></p>
+            <p id="sugar_result"></p>
+            <p id="caffeine_result"></p>
+        </div>
+    </div>
 </body>
 </html>
