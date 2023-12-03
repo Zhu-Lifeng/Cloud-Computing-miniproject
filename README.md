@@ -1,2 +1,3 @@
-# Cloud-Computing-miniproject
-This repository is for the Cloud Computing module's mini-project.
+<h1 align="center">Bevervage Nutrition Calculator Application based on Flask using Coffee API</h1>
+
+<B>Architecture</B>
