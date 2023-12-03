@@ -2,59 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Nutrient Intake Calculator</title>
-    <script>
-        function calculateNutrition() {
-            // 原始计算代码（例如计算waterIntake, bmr, proteinIntake, sugarIntake, caffeineIntake的逻辑）
-
-            // 显示个性化建议
-            var advice = {
-                water: waterIntake < 3000 ? 'Increase your intake by consuming more water or hydrating fluids like herbal teas.' : 'Your intake is within the recommended range.',
-                energy: bmr < 2000 ? 'Increase your energy intake.' : 'Your energy intake is within the recommended range.',
-                protein: proteinIntake < 50 ? 'Increase your protein intake.' : 'Reduce your protein intake. Too much can cause health issues.',
-                sugar: sugarIntake > 50 ? 'Reduce your sugar intake.' : 'Increase your intake by consuming natural sugars from fruits or honey.',
-                caffeine: caffeineIntake > 400 ? 'Reduce your caffeine intake.' : 'Your caffeine intake is within the recommended range.'
-            };
-
-            document.getElementById('water_advice').textContent = 'Water: ' + advice.water;
-            document.getElementById('energy_advice').textContent = 'Energy: ' + advice.energy;
-            document.getElementById('protein_advice').textContent = 'Protein: ' + advice.protein;
-            document.getElementById('sugar_advice').textContent = 'Sugar: ' + advice.sugar;
-            document.getElementById('caffeine_advice').textContent = 'Caffeine: ' + advice.caffeine;
-        }
-    </script>
+    <title>This is result page.</title>
     <style>
-        /* 样式代码保持不变 */
+        body {
+        text-align: center;
+
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            height: 100vh;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: 100% 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+
+        }.container {
+            position: relative;
+            height: 100vh;
+            z-index:2
+        }
+
+        .white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.4); /* 调整透明度 */
+              z-index:1;}
+        .bold-pink-text {
+            font-weight: 1200;
+            color: #ff7e67;
+            font-size: 24px;
+        }
+
+        button {
+        position: relative;
+            background-color: #ff7e67;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+              z-index:2;
+        }
+        p{z-index: 2;position: relative;}
+        pp{z-index: 2;position: relative;font-size: 24px;}
+        button:hover {
+            background-color: #ff5c49;
+        }
     </style>
 </head>
 <body>
-    <div class="background-container">
-        <div class="white-overlay"></div>
-        <p class="bold-pink-text">Nutrient Intake Calculator</p>
-        
-        <!-- 营养计算表单代码 -->
-
-        <div id="nutrition_results">
-            <!-- 营养结果代码 -->
-        </div>
-
-        <h3>Advice</h3>
-        <div id="nutrition_advice">
-            <p id="water_advice"></p>
-            <p id="energy_advice"></p>
-            <p id="protein_advice"></p>
-            <p id="sugar_advice"></p>
-            <p id="caffeine_advice"></p>
-        </div>
-
+     <div class="container">
+         <div class="white-overlay"></div>
+        <p class="bold-pink-text">This is result page.</p>
         <!-- 显示计算结果 -->
-        {% if select_water %}<p>Total Water: {{ total_water }}g</p>{% endif %}
-        {% if select_energy %}<p>Total Energy: {{ total_energy }}kcal</p>{% endif %}
-        {% if select_protein %}<p>Total Protein: {{ total_protein }}g</p>{% endif %}
-        {% if select_sugar %}<p>Total Sugar: {{ total_sugar }}g</p>{% endif %}
-        {% if select_caffeine %}<p>Total Caffeine: {{ total_caffeine }}mg</p>{% endif %}
+        {% if select_water %}<p>Total Water: {{ total_water }}g</p>
+         <br><pp>{{water_suggestion}}</pp> <br>{% endif %}
+         <br>
+        {% if select_energy %}<p>Total Energy: {{ total_energy }}kcal</p>
+         <br><pp>{{energy_suggestion}}</pp> <br>{% endif %}
+         <br>
+        {% if select_protein %}<p>Total Protein: {{ total_protein }}g</p>
+         <br><pp>{{protein_suggestion}} </pp><br>{% endif %}
+         <br>
+        {% if select_sugar %}<p>Total Sugar: {{ total_sugar }}g</p>
+         <br><pp>{{sugar_suggestion}}</pp> <br>{% endif %}
+         <br>
+        {% if select_caffeine %}<p>Total Caffeine: {{ total_caffeine }}mg</p>
+     <br><pp>{{caffeine_suggestion}}</pp> <br>{% endif %}
 
-        <!-- 按钮和其他内容 -->
+        <!-- 其他内容 -->
+
         <form action="/main">
             <button type="submit">Back</button>
         </form>

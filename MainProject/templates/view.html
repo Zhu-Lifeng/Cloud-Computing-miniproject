@@ -12,10 +12,11 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }.background-container {
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+        }.container {
             position: relative;
             height: 100vh;
-            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+
             background-size: 100% 100%;
             background-position: center center;
             background-repeat: no-repeat;
@@ -32,12 +33,14 @@
         h1 {
             color: #ff7e67;
             font-size: 36px;z-index: 2;position: relative;
+
         }
 
         p {z-index: 2;position: relative;
-            color: #4a4e4d;
+
             font-size: 18px;
             margin: 10px 0;
+
         }
 
         form {
@@ -66,7 +69,7 @@
     </style>
 </head>
 <body>
- <div class="background-container">
+ <div class="container">
 
     <h1>User Profile</h1>
 
@@ -75,7 +78,7 @@
     <p>Your Height: {{ user.user_height }}</p>
     <p>Your Weight: {{ user.user_weight }}</p>
     <p>Your Age: {{ user.user_age }}</p>
-
+<p>Your Gender: {{ user.user_gender }}</p>
     <form action="/main">
         <button type="submit">Back</button>
     </form>

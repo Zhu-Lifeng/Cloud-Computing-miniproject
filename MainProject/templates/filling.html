@@ -79,16 +79,16 @@
 <body>
     <div class="background-container">
         <div class="white-overlay"></div>
-        <form onsubmit="return false;">
+        <form  action="/filling" method="post">
             <h2>Nutrient Intake Calculator</h2>
-            <input type="number" id="user_height" name="user_height" placeholder="Height (cm)">
-            <input type="number" id="user_weight" name="user_weight" placeholder="Weight (kg)">
-            <input type="number" id="user_age" name="user_age" placeholder="Age">
-            <select id="user_gender" name="user_gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+            <input type="number" id="user_height" name="user_height" placeholder="{{ user.user_height }}" value="{{ user.user_height }}">
+            <input type="number" id="user_weight" name="user_weight" placeholder="{{ user.user_weight }}" value="{{ user.user_weight }}">
+            <input type="number" id="user_age" name="user_age" placeholder="{{ user.user_age }}" value="{{ user.user_age }}">
+            <select id="user_gender" name="user_gender" >
+                <option value="male"{% if user.user_gender == "male" %}selected{% endif %}>Male</option>
+                <option value="female"{% if  user.user_gender == "female" %}selected{% endif %}>Female</option>
             </select>
-            <button type="button" onclick="calculateNutrition()">Calculate</button>
+            <button type="submit" onclick="calculateNutrition()">Submit</button>
         </form>
 
         <div id="nutrition_results">

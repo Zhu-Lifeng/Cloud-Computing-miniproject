@@ -83,17 +83,19 @@ User
         <h1>This is main page.</h1><br>
         <p>User Name:{{user.user_name}}</p><br>
         <p>User Email:{{user.user_email}}</p><br>
+        <form action="/view">
+    <button type="submit">View my personal information</button><br>
         <!-- 新增的折叠表单切换按钮 -->
         <button type="button" onclick="toggleDrinkForm()">Toggle Drink Form</button>
         <!-- 折叠的饮料提交表单，初始设为隐藏 -->
         <div id="drinkForm" style="display: none;">
             <form action="/drink_add" method="POST">
                 Drink's name is ? <input type="text" name="drink_name"><br>
-                This drink contains <input type="number" name="drink_water">g of water<br>
-                This drink contains <input type="number" name="drink_energy">kcal of energy<br>
-                This drink contains <input type="number" name="drink_protein">g of protein<br>
-                This drink contains <input type="number" name="drink_sugar">g of sugar<br>
-                This drink contains <input type="number" name="drink_caffeine">mg of caffeine<br>
+                This drink contains <input type="number" name="drink_water">g of water per 100g<br>
+                This drink contains <input type="number" name="drink_energy">kcal of energy per 100g<br>
+                This drink contains <input type="number" name="drink_protein">g of protein per 100g<br>
+                This drink contains <input type="number" name="drink_sugar">g of sugar per 100g<br>
+                This drink contains <input type="number" name="drink_caffeine">mg of caffeine per 100g<br>
                 <div style="display: flex; justify-content: center;">
                     <button type="submit">Submit a new drink!</button>
                 </div>
