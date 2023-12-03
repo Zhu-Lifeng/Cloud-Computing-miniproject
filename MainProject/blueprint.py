@@ -215,7 +215,7 @@ def result():
         caffeine_suggestion = f'You get {(total_caffeine/recommand_caffeine*100):.1f} % of your daily caffeine intake recommandation from beverages.'
 
     # 将计算结果传递给模板
-
+    picture()
     return render_template('result.html',
                            select_water=select_water, total_water=total_water,
                            select_energy=select_energy, total_energy=total_energy,
