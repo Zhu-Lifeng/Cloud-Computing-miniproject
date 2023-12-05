@@ -81,10 +81,10 @@
         <div class="white-overlay"></div>
         <form  action="/filling" method="post">
             <h2>Please fill in your personal detail</h2>
-            <input type="number" id="user_height" name="user_height" placeholder="{{ user.user_height }}" value="{{ user.user_height }}">
-            <input type="number" id="user_weight" name="user_weight" placeholder="{{ user.user_weight }}" value="{{ user.user_weight }}">
-            <input type="number" id="user_age" name="user_age" placeholder="{{ user.user_age }}" value="{{ user.user_age }}">
-            <select id="user_gender" name="user_gender" >
+            Your height is <input type="number" id="user_height" name="user_height" placeholder="{{ user.user_height }}" value="{{ user.user_height }}"> cm
+            Your weight is<input type="number" id="user_weight" name="user_weight" placeholder="{{ user.user_weight }}" value="{{ user.user_weight }}"> kg
+            Your age is<input type="number" id="user_age" name="user_age" placeholder="{{ user.user_age }}" value="{{ user.user_age }}"> years old
+            Your gender is<select id="user_gender" name="user_gender" >
                 <option value="male"{% if user.user_gender == "male" %}selected{% endif %}>Male</option>
                 <option value="female"{% if  user.user_gender == "female" %}selected{% endif %}>Female</option>
             </select>
