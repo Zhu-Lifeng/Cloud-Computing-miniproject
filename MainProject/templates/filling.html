@@ -63,33 +63,65 @@
         }
         button:hover {
             background-color: #ff5c49; 
-        }
-    </style>
-    <script>
-        function calculateNutrition() {
-            var weight = parseFloat(document.getElementById('user_weight').value);
-            var height = parseFloat(document.getElementById('user_height').value);
-            var age = parseInt(document.getElementById('user_age').value);
-            var gender = document.getElementById('user_gender').value;
+        }.flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-            // ...JavaScript 计算代码保持不变...
-        }
-    </script>
+.form-group {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+     align-items: center;
+}
+
+.form-group label {
+    min-width: 150px;
+     align-items: center;
+}
+
+input[type="number"], select {
+    flex-grow: 1;
+     align-items: center;
+}
+
+
+
+
+    </style>
 </head>
 <body>
     <div class="background-container">
         <div class="white-overlay"></div>
-        <form  action="/filling" method="post">
-            <h2>Please fill in your personal detail</h2>
-            Your height is <input type="number" id="user_height" name="user_height" placeholder="{{ user.user_height }}" value="{{ user.user_height }}"> cm
-            Your weight is<input type="number" id="user_weight" name="user_weight" placeholder="{{ user.user_weight }}" value="{{ user.user_weight }}"> kg
-            Your age is<input type="number" id="user_age" name="user_age" placeholder="{{ user.user_age }}" value="{{ user.user_age }}"> years old
-            Your gender is<select id="user_gender" name="user_gender" >
+        <form action="/filling" method="post">
+    <h2>Please fill in your personal detail</h2>
+    <div class="flex-container">
+        <div class="form-group">
+            <label>Your height is</label>
+            <input type="number" id="user_height" name="user_height" placeholder="{{ user.user_height }}" value="{{ user.user_height }}">cm
+        </div>
+        <div class="form-group">
+            <label>Your weight is</label>
+            <input type="number" id="user_weight" name="user_weight" placeholder="{{ user.user_weight }}" value="{{ user.user_weight }}">kg
+        </div>
+        <div class="form-group">
+            <label>Your age is</label>
+            <input type="number" id="user_age" name="user_age" placeholder="{{ user.user_age }}" value="{{ user.user_age }}">years old
+        </div>
+        <div class="form-group">
+            <label>Your gender is</label>
+            <select id="user_gender" name="user_gender">
                 <option value="male"{% if user.user_gender == "male" %}selected{% endif %}>Male</option>
-                <option value="female"{% if  user.user_gender == "female" %}selected{% endif %}>Female</option>
+                <option value="female"{% if user.user_gender == "female" %}selected{% endif %}>Female</option>
             </select>
-            <button type="submit" onclick="calculateNutrition()">Submit</button>
-        </form>
+        </div>
+    </div>
+    <button type="submit" onclick="calculateNutrition()">Submit</button>
+</form>
+
+
+
 
         <div id="nutrition_results">
             <p id="bmr_result"></p>
