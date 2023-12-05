@@ -1,0 +1,2 @@
+runtime: python38  # 使用适合您应用的运行时版本
+entrypoint: gunicorn -b :main.py  # 替换 yourapp 为您的应用程序入口点
