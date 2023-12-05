@@ -1,5 +1,6 @@
 from MainProject import App_Creation, db
 import pandas as pd
+import ssl
 from MainProject.drink_class import Drink
 app = App_Creation()
 
@@ -21,4 +22,7 @@ if __name__ == '__main__':
         # 将对象添加到会话
             db.session.add(drink)
         db.session.commit()
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    context.load_cert_chain('ssl_cert.crt', 'ssl_private.key', '1998')
+
+    app.run(debug=True,  ssl_context=context, host='0.0.0.0',port=8080)
