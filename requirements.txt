@@ -5,3 +5,4 @@ flask_sqlalchemy
 pandas
 Pillow
 openpyxl
+requests
