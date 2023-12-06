@@ -1,4 +1,3 @@
-  GNU nano 5.4                                       Dockerfile                                                 
 FROM python:3.8
 
 WORKDIR /app
