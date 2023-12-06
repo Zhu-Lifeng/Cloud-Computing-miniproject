@@ -5,6 +5,9 @@
   <img width="700" src="https://github.com/Zhu-Lifeng/Cloud-Computing-miniproject/blob/main/Readme/p1.png" alt="Architecture">
 </p>
 
+# Interduction
+This project is a HTTPS webpage application based on Docker Technique. We provide a useful daily tool to estimate some nutrition you will gain from your daily beverage intake.
+
 # How to Install<br>
 
 ## 1. make sure you have connected to your GCP instance.<br>
@@ -13,6 +16,7 @@
 
   ```sh
   sudo apt−get update
+  sudo apt update
   sudo apt install python3-pip
   sudo apt install install git
   ```
@@ -23,17 +27,21 @@
   git clone https://github.com/Zhu-Lifeng/Cloud-Computing-miniproject.git
   ```
 
-## 4. finish the library installation<br>
+## 4. install the docker<br>
 
   ```sh
-  cd Cloud-Computing-miniproject
-  pip install -r requirements.txt
+  sudo apt install docker.io
   ```
 
-## 5. run the trigger, start the application<br>
+## 5. create the docker container entity<br>
 
   ```sh
-  python3 main.py
+  sudo docker build -t your-image-name .
+  ```
+(you can name your docker whatever you want)
+## 6. run the docker<br>
+  ```sh
+  sudo docker run -p 8080:8080 your-image-name
   ```
 
 # System Overview and function introduction<br>
