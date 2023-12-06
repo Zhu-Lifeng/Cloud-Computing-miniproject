@@ -21,10 +21,11 @@ This project is a HTTPS webpage application based on Docker Technique. We provid
   sudo apt install install git
   ```
 
-## 3. download the application files from git<br>
+## 3. download the application files from git and enter its folder<br>
 
   ```sh
   git clone https://github.com/Zhu-Lifeng/Cloud-Computing-miniproject.git
+  cd Cloud-Computing-miniproject
   ```
 
 ## 4. install the docker<br>
