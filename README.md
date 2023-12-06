@@ -44,6 +44,9 @@ This project is a HTTPS webpage application based on Docker Technique. We provid
   ```sh
   sudo docker run -p 8080:8080 your-image-name
   ```
+## 7. finish<br>
+Now, you visit the application with the external IP of your GCP instance with the https starter and 8080 ending.
+
 
 # System Overview and function introduction<br>
 ## 1. Start page
