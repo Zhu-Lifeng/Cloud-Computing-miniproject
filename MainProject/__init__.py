@@ -3,7 +3,6 @@ from flask_login import UserMixin, LoginManager, login_user, login_required, log
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
-# 下面这2行要用最终选定的数据库的导入方式替代，此处用SQLite的暂存
 from flask_sqlalchemy import SQLAlchemy
 
 
