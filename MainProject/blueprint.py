@@ -38,7 +38,7 @@ def login_post():
     USER_email = request.form['user_email']
     USER_password = request.form['user_password']
     # print(USER_email,USER_password)
-    USER = User.query.filter_by(user_email=USER_email).first()  # 本处query需按最终使用db类型修正函数
+    USER = User.query.filter_by(user_email=USER_email).first()
 
     if not USER or not check_password_hash(USER.user_password, USER_password):
         flash('Please check your e-mail address or password.')
@@ -70,7 +70,7 @@ def signup_post():
                     user_password=generate_password_hash(USER_password, method='pbkdf2:sha256'),
                     user_weight=80, user_height=180, user_age=25, user_gender ='X')
 
-    # 这里把新用户数据传到数据库里
+    # upload the new user information
     db.session.add(NEW_USER)
     db.session.commit()
 
@@ -88,15 +88,11 @@ def filling():
 @BP.route('/filling', methods=['POST'])
 @login_required
 def filling_post():
-    # 这地方按说应该用PUT,但是HTML写的网页只支持POST和GET，要用PUT需要使用JavaScript,待探究
     current_user.user_weight = request.form.get('user_weight')
     current_user.user_height = request.form.get('user_height')
     current_user.user_age = request.form.get('user_age')
     current_user.user_gender = request.form.get('user_gender')
     db.session.commit()
-
-    # 这里要把用户数据更新到数据库里
-
     return redirect(url_for('my_blueprint.main'))
 
 
@@ -141,7 +137,6 @@ def drink_add():
 @BP.route('/result', methods=['POST'])
 @login_required
 def result():
-    # 获取用户选择的数据类型
     select_water = 'select_water' in request.form
     select_energy = 'select_energy' in request.form
     select_protein = 'select_protein' in request.form
@@ -214,7 +209,6 @@ def result():
         recommand_caffeine = 400
         caffeine_suggestion = f'You get {(total_caffeine/recommand_caffeine*100):.1f} % of your daily caffeine intake recommandation from beverages.'
 
-    # 将计算结果传递给模板
     picture()
     return render_template('result.html',
                            select_water=select_water, total_water=total_water,
