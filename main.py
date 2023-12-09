@@ -19,7 +19,7 @@ if __name__ == '__main__':
                           drink_protein=float(df['Protein/g'][i]),
                           drink_sugar=float(df['Sugars/g'][i]),
                           drink_caffeine=float(df['Caffeine/mg'][i]))
-        # 将对象添加到会话
+        # load the origianl data table into database
             db.session.add(drink)
         db.session.commit()
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
