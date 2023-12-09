@@ -1,9 +1,6 @@
 from flask_login import UserMixin
 from . import db
 
-
-# 以下数据需从数据库抓取
-
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.String(80), nullable=False)
