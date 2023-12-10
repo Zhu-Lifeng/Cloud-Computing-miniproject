@@ -17,7 +17,7 @@ This project is a HTTPS webpage application based on Docker Technique. We provid
   ```sh
   sudo apt update
   sudo apt install python3-pip
-  sudo apt install install git
+  sudo apt install git
   ```
 
 ## 3. download the application files from git and enter its folder<br>
