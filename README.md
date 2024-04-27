@@ -1,4 +1,4 @@
-<h1 align="center">Bevervage Nutrition Calculator Application based on Flask using Coffee API</h1>
+<h1 align="center">Beverage Nutrition Calculator Application based on Flask using Coffee API</h1>
 
 # Architecture
 <p align="center">
